@@ -3,10 +3,8 @@ package com.JSG.JSGApplication.Controller;
 import com.JSG.JSGApplication.Entity.Artist;
 import com.JSG.JSGApplication.Service.ArtistService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
 
@@ -34,4 +32,19 @@ public class ArtistController {
         this.artistService.deleteArtistByID(id);
         return this.artistService.getAllArtists();
     }
+
+
+    @RequestMapping(method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE)
+    public void updateArtist(@RequestBody Artist artist){
+        this.artistService.updateArtist(artist);
+    }
+
+
+    @RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+    public void addNewArtist(@RequestBody Artist artist){
+        this.artistService.addNewArtist(artist);
+    }
+
+
+
 }

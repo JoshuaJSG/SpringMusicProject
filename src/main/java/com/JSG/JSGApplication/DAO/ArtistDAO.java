@@ -1,6 +1,8 @@
 package com.JSG.JSGApplication.DAO;
 
 import com.JSG.JSGApplication.Entity.Artist;
+import com.JSG.JSGApplication.Interfaces.ArtistDAOInterface;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 
 import java.util.Collection;
@@ -9,7 +11,8 @@ import java.util.Map;
 
 
 @Repository
-public class ArtistDAO {
+@Qualifier("tempData")
+public class ArtistDAO implements ArtistDAOInterface {
 
     //HARD CODED DATABASE
     private static Map<Integer, Artist> artists;
@@ -28,18 +31,32 @@ public class ArtistDAO {
 
 
 
+    @Override
     public Collection<Artist> getAllArtists(){
         return artists.values();
     }
 
+    @Override
     public Artist getArtistByID(int id){
         return this.artists.get(id);
     }
 
+    @Override
     public void deleteArtistByID(int id){
         this.artists.remove(id);
-
     }
 
+    @Override
+    public void updateArtist(Artist artist){
+        Artist newArtist = artists.get(artist.getID());
+        newArtist.setName(artist.getName());
+        artists.put(artist.getID(), newArtist);
+    }
+
+
+    @Override
+    public void addNewArtist(Artist artist){
+        this.artists.put(artist.getID(), artist);
+    }
 
 }
