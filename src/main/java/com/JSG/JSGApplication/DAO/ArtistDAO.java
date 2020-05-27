@@ -19,9 +19,9 @@ public class ArtistDAO {
         artists = new HashMap<Integer, Artist>(){
             {
                 put(1, new Artist(1, "Joshua"));
-                put(1, new Artist(1, "Jordan"));
-                put(1, new Artist(1, "Smith"));
-                put(1, new Artist(1, "Luisiana"));
+                put(2, new Artist(2, "Jordan"));
+                put(3, new Artist(3, "Smith"));
+                put(4, new Artist(4, "Luisiana"));
             }
         };
     }
@@ -30,6 +30,15 @@ public class ArtistDAO {
 
     public Collection<Artist> getAllArtists(){
         return artists.values();
+    }
+
+    public Artist getArtistByID(int id){
+        return this.artists.get(id);
+    }
+
+    public void deleteArtistByID(int id){
+        this.artists.remove(id);
+
     }
 
 
