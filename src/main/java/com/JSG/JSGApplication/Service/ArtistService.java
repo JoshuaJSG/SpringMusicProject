@@ -15,15 +15,14 @@ public class ArtistService {
 
     //SERVICE THAT USES HARDCODED DATABASE
     @Autowired
-    @Qualifier("sqlDB")
+    @Qualifier("tempData")
     private ArtistDAOInterface artistDAO;
 
     public Collection<Artist> getAllArtists(){
         return artistDAO.getAllArtists();
     }
 
-
-
+    
     public Artist getArtistByID(int id){
         return this.artistDAO.getArtistByID(id);
     }
