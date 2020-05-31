@@ -51,16 +51,23 @@ public class MySQLConnection implements ArtistDAOInterface {
 
     @Override
     public void deleteArtistByID(int id) {
-
+        final String sqlQuery = "DELETE FROM artists WHERE id = ?";
+        jdbcTemplate.update(sqlQuery, id);
     }
 
     @Override
     public void updateArtist(Artist artist) {
-
+        final String sqlQuery = "UPDATE artists SET name = ? WHERE id = ?";
+        final String name = artist.getName();
+        final int id = artist.getID();
+        jdbcTemplate.update(sqlQuery, new Object[] {name, id});
     }
 
     @Override
     public void addNewArtist(Artist artist) {
-
+        final String sqlQuery = "INSERT INTO artists (name) VALUES (?)";
+        final String name = artist.getName();
+//        final int id = artist.getID();
+        jdbcTemplate.update(sqlQuery, name);
     }
 }
