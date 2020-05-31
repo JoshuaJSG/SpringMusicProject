@@ -1,6 +1,5 @@
 package com.JSG.JSGApplication.Service;
 
-import com.JSG.JSGApplication.DAO.ArtistDAO;
 import com.JSG.JSGApplication.Entity.Artist;
 import com.JSG.JSGApplication.Interfaces.ArtistDAOInterface;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,14 +14,14 @@ public class ArtistService {
 
     //SERVICE THAT USES HARDCODED DATABASE
     @Autowired
-    @Qualifier("tempData")
+    @Qualifier("mysql")
     private ArtistDAOInterface artistDAO;
 
     public Collection<Artist> getAllArtists(){
         return artistDAO.getAllArtists();
     }
 
-    
+
     public Artist getArtistByID(int id){
         return this.artistDAO.getArtistByID(id);
     }

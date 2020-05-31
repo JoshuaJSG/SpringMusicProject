@@ -10,7 +10,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 
-@Repository
+@Repository //DEFINES Storage, retrieval, update, delete
 @Qualifier("tempData")
 public class ArtistDAO implements ArtistDAOInterface {
 
