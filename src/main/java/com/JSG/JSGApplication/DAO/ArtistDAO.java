@@ -12,14 +12,17 @@ import java.util.*;
 @Qualifier("tempData")
 public class ArtistDAO implements ArtistDAOInterface {
 
+
     //HARD CODED DATABASE
     private static Map<Integer, Artist> artists;
+    private static List<String> songs;
+
 
     static {
 
         artists = new HashMap<Integer, Artist>(){
             {
-                put(1, new Artist(1, "Joshua", new SongClass().add("hello")));
+                put(1, new Artist(1, "Joshua", new SongClass().displaySongs()));
 //                put(2, new Artist(2, "Jordan"),"hi", "add");
 //                put(3, new Artist(3, "Smith"),"hi", "add");
 //                put(4, new Artist(4, "Luisiana"),"hi", "add");
@@ -55,5 +58,6 @@ public class ArtistDAO implements ArtistDAOInterface {
     public void addNewArtist(Artist artist){
         this.artists.put(artist.getID(), artist);
     }
+
 
 }
