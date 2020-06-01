@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.jdbc.core.JdbcTemplate;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -66,9 +67,12 @@ public class MySQLConnection implements ArtistDAOInterface {
 
     @Override
     public void addNewArtist(Artist artist) {
-        final String sqlQuery = "INSERT INTO artists (name) VALUES (?)";
+        final String sqlQuery = "INSERT INTO artists (name, songs) VALUES (?,?)";
         final String name = artist.getName();
-//        final int id = artist.getID();
-        jdbcTemplate.update(sqlQuery, name);
+        final List<String> songs = artist.getSongs();
+        final Object[] songFields = new Object[]{artist.getSongs()};
+        for (int i = 0; i <songFields.length ; i++) {
+            jdbcTemplate.update(sqlQuery, new Object[] {name, songFields[i].toString()});
+        }
     }
 }
