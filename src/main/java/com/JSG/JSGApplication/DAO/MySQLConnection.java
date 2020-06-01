@@ -30,6 +30,7 @@ public class MySQLConnection implements ArtistDAOInterface {
             Artist artist = new Artist();
             artist.setID(resultSet.getInt("id"));
             artist.setName(resultSet.getString("name"));
+            artist.setSongs(new SongClass().displaySongs());
             return artist;
         }
     }
