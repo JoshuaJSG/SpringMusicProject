@@ -17,7 +17,7 @@ public class MySQLArtist implements ArtistDAOInterface {
     public Collection<Artist> getAllArtists() {
         return new ArrayList<Artist>(){
             {
-                add(new Artist(1,"New Testing name"));
+//                add(new Artist(1,"New Testing name"));
             }
         };
     }

@@ -5,9 +5,7 @@ import com.JSG.JSGApplication.Interfaces.ArtistDAOInterface;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 
 @Repository //DEFINES Storage, retrieval, update, delete
@@ -21,14 +19,13 @@ public class ArtistDAO implements ArtistDAOInterface {
 
         artists = new HashMap<Integer, Artist>(){
             {
-                put(1, new Artist(1, "Joshua"));
-                put(2, new Artist(2, "Jordan"));
-                put(3, new Artist(3, "Smith"));
-                put(4, new Artist(4, "Luisiana"));
+                put(1, new Artist(1, "Joshua", new SongClass().add("hello")));
+//                put(2, new Artist(2, "Jordan"),"hi", "add");
+//                put(3, new Artist(3, "Smith"),"hi", "add");
+//                put(4, new Artist(4, "Luisiana"),"hi", "add");
             }
         };
     }
-
 
 
     @Override
