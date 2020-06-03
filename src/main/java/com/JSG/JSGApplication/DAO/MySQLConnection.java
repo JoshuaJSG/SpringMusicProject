@@ -23,22 +23,29 @@ public class MySQLConnection implements ArtistDAOInterface {
 
     @Autowired
     private JdbcTemplate jdbcTemplate;
+    private Artist artist;
 
     private static class ArtistRollMapper implements RowMapper<Artist>{
 
         @Override
         public Artist mapRow(ResultSet resultSet, int i) throws SQLException {
+            List<String> results = new ArrayList<>();
             Artist artist = new Artist();
             artist.setID(resultSet.getInt("id"));
             artist.setName(resultSet.getString("name"));
-            artist.setSongs(new SongClass().displaySongs());
+//            artist.setSongs(new SongClass().displaySongs());
+//            String songsColumn = resultSet.getString("songs");
+                while (resultSet.next()){
+                    results.add(resultSet.getString("songs"));
+                }
+            artist.setSongs(results);
             return artist;
         }
     }
 
     @Override
     public Collection<Artist> getAllArtists() {
-        final String sqlQuery = "SELECT id, name FROM artists";
+        final String sqlQuery = "SELECT id, name, songs FROM artists";
         List<Artist> artists = jdbcTemplate.query(sqlQuery, new ArtistRollMapper());
         return artists;
     }
