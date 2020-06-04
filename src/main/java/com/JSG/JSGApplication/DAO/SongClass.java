@@ -8,9 +8,8 @@ import java.util.List;
 
 public class SongClass {
 
-    List<String> songs = new ArrayList<>();
-
-    public List<String> displaySongs(){
+    private String songs;
+    public String displaySongs(){
       addSongs();
       return songs;
     }
@@ -18,7 +17,6 @@ public class SongClass {
 
 
     private void addSongs(){
-        songs.add("hello");
-        songs.add("there");
+        songs+="hello"+"there";
     }
 }
