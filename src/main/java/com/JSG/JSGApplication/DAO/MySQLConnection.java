@@ -33,12 +33,15 @@ public class MySQLConnection implements ArtistDAOInterface {
             Artist artist = new Artist();
             artist.setID(resultSet.getInt("id"));
             artist.setName(resultSet.getString("name"));
-//            artist.setSongs(new SongClass().displaySongs());
-//            String songsColumn = resultSet.getString("songs");
-                while (resultSet.next()){
-                    results.add(resultSet.getString("songs"));
-                }
-            artist.setSongs(results);
+            artist.setSongs(resultSet.getString("songs"));
+
+            //trying to get the items in the array for each row and set to an artist for their songs.
+            // See mySQL for table
+//                while (resultSet.next()){
+//                    int set = resultSet.getInt(i);
+//                    results.add(resultSet.getString("songs"));
+//                }
+//            artist.setSongs(results);
             return artist;
         }
     }
@@ -52,7 +55,7 @@ public class MySQLConnection implements ArtistDAOInterface {
 
     @Override
     public Artist getArtistByID(int id) {
-        final String sqlQuery = "SELECT id, name FROM artists WHERE id = ?";
+        final String sqlQuery = "SELECT id, name, songs FROM artists WHERE id = ?";
         //queryForObject as we want one field back.
         Artist artist = jdbcTemplate.queryForObject(sqlQuery, new ArtistRollMapper(), id);
         return artist;
@@ -76,10 +79,12 @@ public class MySQLConnection implements ArtistDAOInterface {
     public void addNewArtist(Artist artist) {
         final String sqlQuery = "INSERT INTO artists (name, songs) VALUES (?,?)";
         final String name = artist.getName();
-        final List<String> songs = artist.getSongs();
-        final Object[] songFields = new Object[]{artist.getSongs()};
-        for (int i = 0; i <songFields.length ; i++) {
-            jdbcTemplate.update(sqlQuery, new Object[] {name, songFields[i].toString()});
-        }
+        final String songs = artist.getSongs();
+        jdbcTemplate.update(sqlQuery, new Object[]{name, songs});
+//        final List<String> songs = artist.getSongs();
+//        final Object[] songFields = new Object[]{artist.getSongs()};
+//        for (int i = 0; i <songFields.length ; i++) {
+//            jdbcTemplate.update(sqlQuery, new Object[] {name, songFields[i].toString()});
+//        }
     }
 }
