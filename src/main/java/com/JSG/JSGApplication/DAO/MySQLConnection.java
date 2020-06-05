@@ -81,6 +81,9 @@ public class MySQLConnection implements ArtistDAOInterface {
         final String name = artist.getName();
         final String songs = artist.getSongs();
         jdbcTemplate.update(sqlQuery, new Object[]{name, songs});
+
+
+        //Below can be used for hard coded song field data
 //        final List<String> songs = artist.getSongs();
 //        final Object[] songFields = new Object[]{artist.getSongs()};
 //        for (int i = 0; i <songFields.length ; i++) {
