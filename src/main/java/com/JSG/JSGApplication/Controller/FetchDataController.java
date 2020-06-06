@@ -94,7 +94,6 @@ public class FetchDataController {
 
     }
 
-    //MARK ->
     private void loopList(List<String> albums){
         for (String album : albums) {
             System.out.println(album);

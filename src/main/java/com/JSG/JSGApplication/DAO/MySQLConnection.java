@@ -1,15 +1,14 @@
 package com.JSG.JSGApplication.DAO;
 
 
+import com.JSG.JSGApplication.Controller.FetchDataController;
 import com.JSG.JSGApplication.Entity.Artist;
 import com.JSG.JSGApplication.Interfaces.ArtistDAOInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
-import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Repository;
-import org.springframework.stereotype.Service;
-import org.springframework.jdbc.core.JdbcTemplate;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -35,14 +34,11 @@ public class MySQLConnection implements ArtistDAOInterface {
             artist.setName(resultSet.getString("name"));
             artist.setSongs(resultSet.getString("songs"));
 
-            //trying to get the items in the array for each row and set to an artist for their songs.
-            // See mySQL for table
-//                while (resultSet.next()){
-//                    int set = resultSet.getInt(i);
-//                    results.add(resultSet.getString("songs"));
-//                }
-//            artist.setSongs(results);
+            //Fetching the songs based on the name input
+            FetchDataController fetchDataController = new FetchDataController();
+            fetchDataController.searchArtistbyName(artist.getName());
             return artist;
+
         }
     }
 
@@ -90,4 +86,5 @@ public class MySQLConnection implements ArtistDAOInterface {
 //            jdbcTemplate.update(sqlQuery, new Object[] {name, songFields[i].toString()});
 //        }
     }
+
 }
