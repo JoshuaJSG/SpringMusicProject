@@ -16,11 +16,11 @@ import java.util.List;
 public class FetchDataController {
 
     private List<String> albums = new ArrayList<>();
-    private List<String> songs = new ArrayList<>();
+    public List<String> songs = new ArrayList<>();
     public String baseUrl = "https://itunes.apple.com/search?term=";
 
 
-    public String searchArtistbyName(String artistName){
+    public List<String> searchArtistbyName(String artistName){
         String usedArtistName = "";
         List<String> namesArrayWithPlus = new ArrayList<>();
         String[] splitArtistNameArray = artistName.split(" ");
@@ -43,8 +43,9 @@ public class FetchDataController {
             System.out.println("Error making request to URL: " +newUrl+"\n"+ e.getLocalizedMessage());
             e.printStackTrace();
         }
-        return newUrl;
+        return songs;
     }
+
 
 
 
@@ -90,16 +91,12 @@ public class FetchDataController {
         System.out.println("Artist: "+name+ "\nSongs:");
         System.out.println();
         loopList(songs);
-
-
     }
 
-    private void loopList(List<String> albums){
-        for (String album : albums) {
-            System.out.println(album);
+    private void loopList(List<String> musicList){
+        for (String music : musicList) {
+            System.out.println(music);
         }
     }
-
-
 }
 

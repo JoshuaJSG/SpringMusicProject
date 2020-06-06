@@ -1,11 +1,13 @@
 package com.JSG.JSGApplication.Entity;
 
+import com.JSG.JSGApplication.Controller.FetchDataController;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class Artist {
 
-
+private FetchDataController fetchDataController;
     private int ID;
     private String name;
     private String songs;
@@ -38,14 +40,6 @@ public class Artist {
     public void setName(String name) {
         this.name = name;
     }
-
-//    public List<String> getSongs() {
-//        return songs;
-//    }
-
-//    public void setSongs(List<String> songs) {
-//        this.songs = songs;
-//    }
 
 
     public String getSongs() {

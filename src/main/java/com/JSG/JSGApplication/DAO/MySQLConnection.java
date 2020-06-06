@@ -24,6 +24,7 @@ public class MySQLConnection implements ArtistDAOInterface {
     private JdbcTemplate jdbcTemplate;
     private Artist artist;
 
+    private FetchDataController fetchDataController = new FetchDataController();
     private static class ArtistRollMapper implements RowMapper<Artist>{
 
         @Override
@@ -76,15 +77,16 @@ public class MySQLConnection implements ArtistDAOInterface {
         final String sqlQuery = "INSERT INTO artists (name, songs) VALUES (?,?)";
         final String name = artist.getName();
         final String songs = artist.getSongs();
-        jdbcTemplate.update(sqlQuery, new Object[]{name, songs});
+//        jdbcTemplate.update(sqlQuery, new Object[]{name, songs});
 
 
         //Below can be used for hard coded song field data
 //        final List<String> songs = artist.getSongs();
-//        final Object[] songFields = new Object[]{artist.getSongs()};
-//        for (int i = 0; i <songFields.length ; i++) {
-//            jdbcTemplate.update(sqlQuery, new Object[] {name, songFields[i].toString()});
-//        }
+        final Object[] songFields = new Object[]{fetchDataController.searchArtistbyName(artist.getName())};
+        for (int i = 0; i <songFields.length ; i++) {
+            jdbcTemplate.update(sqlQuery, new Object[] {name, songFields[i].toString()});
+        }
+
     }
 
 }
