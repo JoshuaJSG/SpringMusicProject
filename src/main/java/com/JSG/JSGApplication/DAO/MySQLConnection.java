@@ -86,7 +86,7 @@ public class MySQLConnection implements ArtistDAOInterface {
         for (int i = 0; i <songFields.length ; i++) {
             jdbcTemplate.update(sqlQuery, new Object[] {name, songFields[i].toString()});
         }
-
+        fetchDataController.cleanSongs();
     }
 
 }

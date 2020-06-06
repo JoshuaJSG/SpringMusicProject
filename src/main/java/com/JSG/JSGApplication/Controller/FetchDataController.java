@@ -47,6 +47,9 @@ public class FetchDataController {
     }
 
 
+    public void cleanSongs(){
+        songs = new ArrayList<>();
+    }
 
 
     private String getItemsFromList(List<String> array){
