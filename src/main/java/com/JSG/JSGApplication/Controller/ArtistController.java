@@ -10,6 +10,7 @@ import java.util.Collection;
 
 @RestController
 @RequestMapping("/artists")
+@CrossOrigin("*")
 public class ArtistController {
 
     @Autowired
