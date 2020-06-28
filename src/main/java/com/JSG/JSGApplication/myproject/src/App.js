@@ -5,6 +5,9 @@ import axios from "axios";
 
 
 
+
+
+
 const ArtistProfiles = () =>{
 const [artistProfiles, setArtistProfiles] = useState([]);
 
@@ -30,19 +33,24 @@ const [artistProfiles, setArtistProfiles] = useState([]);
 
         )
     })
-
-    return <h1>Hello</h1>
     //extra [] when our list get updated, function is called again, updating our display to show incoming data.
 }
 
 
+function addingNewArtist(event){
 
+}
 
 function App() {
     return(
-        <div className ="App">
+        <>
             <ArtistProfiles/>
-        </div>
+            <input type="text" />
+            <button onClick={addingNewArtist}>Add Artist</button>
+            <button>Delete Artist</button>
+
+            
+        </>
     );
 
 
