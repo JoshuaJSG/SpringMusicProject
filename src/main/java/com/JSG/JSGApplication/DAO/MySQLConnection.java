@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -76,7 +77,6 @@ public class MySQLConnection implements ArtistDAOInterface {
     public void addNewArtist(Artist artist) {
         final String sqlQuery = "INSERT INTO artists (name, songs) VALUES (?,?)";
         final String name = artist.getName();
-        final String songs = artist.getSongs();
 //        jdbcTemplate.update(sqlQuery, new Object[]{name, songs});
 
 

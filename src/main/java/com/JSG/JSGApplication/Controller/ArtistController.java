@@ -9,14 +9,14 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Collection;
 
 @RestController
-@RequestMapping("/artists")
 @CrossOrigin("*")
+@RequestMapping("/artists")
 public class ArtistController {
 
     @Autowired
     private ArtistService artistService;
 
-
+    @CrossOrigin
     @RequestMapping(method = RequestMethod.GET)
     public Collection<Artist> getAllArtists(){
         return artistService.getAllArtists();

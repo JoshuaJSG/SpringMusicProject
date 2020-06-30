@@ -15,7 +15,6 @@ private FetchDataController fetchDataController;
     public Artist(int ID, String name, String songs) {
         this.ID = ID;
         this.name = name;
-//        this.songs = new ArrayList<String>(songs);
         this.songs = songs;
     }
 
