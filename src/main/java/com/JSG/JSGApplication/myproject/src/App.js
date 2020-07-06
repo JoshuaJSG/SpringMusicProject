@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef, Component } from 'react';
 import axios from "axios";
+import { Button } from 'reactstrap';
 
 const api = axios.create({
     baseURL: "http://localhost:8080/artists"
@@ -29,9 +30,11 @@ class App extends Component{
 
 
     createArtist = async () =>{
-       let response = await api.post('/', {name: this.state.theArtistName})
-       this.setState({theArtistName: ""})
-       this.getArtists()
+        this.getArtists()
+        if (!this.state.theArtistName == ""){
+            let response = await api.post('/', {name: this.state.theArtistName})
+            this.setState({theArtistName: ""})
+        }return
     }
 
 
@@ -43,11 +46,15 @@ class App extends Component{
    
       
 
+    //Once data is changed it is "Mounted" 
     componentDidMount(){
         this.createArtist()
 
     }
 
+    componentWillUpdate(){
+        this.getArtists()
+    }
     //This is called everytime the textbox is updated
     handleArtistNameChange(event) {
         this.setState({ theArtistName: event.target.value });
@@ -55,14 +62,16 @@ class App extends Component{
 
     render(){
         return(
-            <>           
-            <input type='Text' placeholder="Enter Artist Name" 
-            name="theArtistName" 
-            value={this.state.theArtistName}
-            onChange={this.handleArtistNameChange}></input>
-                <button onClick={this.createArtist}>Add Artist</button>
-                    {this.state.artists.map(artist => <h4 key={artist.id}>{artist.name}
-                <button onClick={() =>this.deleteArtist(artist.id)}>Delete artist</button></h4>)}
+            
+            <>
+                <input type='Text' placeholder="Enter Artist Name" 
+                name="theArtistName" 
+                value={this.state.theArtistName}
+                onChange={this.handleArtistNameChange}></input>
+                    <button onClick={this.createArtist}>Add Artist</button>
+                
+                        {this.state.artists.map(artist => <h4 key={artist.id}>{artist.name}
+                    <button onClick={() =>this.deleteArtist(artist.id)}>Delete artist</button></h4>)}
             </>
         )
         
