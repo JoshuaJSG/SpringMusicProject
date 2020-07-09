@@ -1,10 +1,25 @@
-import React, { useState, useEffect, useRef, Component } from 'react';
+import React, { useState, Component } from 'react';
 import axios from "axios";
-import { Button } from 'reactstrap';
+import styled, { ThemeProvider } from 'styled-components';
+import './App.css';
+import Button from './AppComponentCSS';
+
+
+
+const theme = {
+    font: 'sans-serif'
+}
+
+const H1 = styled.h1`
+    font-family: ${(props) => props.theme.font};
+`
+
+
 
 const api = axios.create({
     baseURL: "http://localhost:8080/artists"
 });
+
 
 
 class App extends Component{
@@ -48,6 +63,7 @@ class App extends Component{
 
     //Once data is changed it is "Mounted" 
     componentDidMount(){
+        document.title = "Hey"
         this.createArtist()
 
     }
@@ -64,14 +80,18 @@ class App extends Component{
         return(
             
             <>
+            <ThemeProvider theme={theme}>
+            <div className="App">
+                <H1>Artist Retrieval App</H1>
                 <input type='Text' placeholder="Enter Artist Name" 
-                name="theArtistName" 
-                value={this.state.theArtistName}
-                onChange={this.handleArtistNameChange}></input>
-                    <button onClick={this.createArtist}>Add Artist</button>
-                
+                    name="theArtistName" 
+                    value={this.state.theArtistName}
+                    onChange={this.handleArtistNameChange}></input>
+                <Button onClick={this.createArtist}>Add Artist</Button>
                         {this.state.artists.map(artist => <h4 key={artist.id}>{artist.name}
-                    <button onClick={() =>this.deleteArtist(artist.id)}>Delete artist</button></h4>)}
+                <Button onClick={() =>this.deleteArtist(artist.id)}>Delete artist</Button></h4>)}
+            </div>
+            </ThemeProvider>
             </>
         )
         
