@@ -19,7 +19,7 @@ public class FetchDataController {
     public List<String> songs = new ArrayList<>();
     public String baseUrl = "https://itunes.apple.com/search?term=";
 
-
+    
     public List<String> searchArtistbyName(String artistName){
         String usedArtistName = "";
         List<String> namesArrayWithPlus = new ArrayList<>();
