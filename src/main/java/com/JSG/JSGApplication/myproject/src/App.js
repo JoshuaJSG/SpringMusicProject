@@ -3,6 +3,7 @@ import axios from "axios";
 import styled, { ThemeProvider } from 'styled-components';
 import './App.css';
 import Button from './AppComponentCSS';
+import { func } from 'prop-types';
 
 
 const stripStyle = {
@@ -12,13 +13,22 @@ const stripStyle = {
 
 const artistStrip = {
     background: '#fab1a0',
-    padding: '1.5rem'
+    padding: '1.5rem',
+
+
+}
+
+function createEmptyLine() {
+    const emptySpace = {
+        background: 'white',
+        padding: '0.5rem'
+    }
 }
 
 //adding a space after the header backround
 const emptySpace = {
     background: 'white',
-    padding: '0.5rem'
+    padding: '0.1rem'
 }
 
 
@@ -105,11 +115,14 @@ class App extends Component {
 
                         </div>
                         <div style={emptySpace}></div>
-                        <div style={artistStrip}>
-                            {this.state.artists.map(artist => <h4 key={artist.id}>{artist.name}
-                                <Button onClick={() => this.deleteArtist(artist.id)}>Delete artist</Button></h4>)}
-                        </div>
                     </div>
+                    <div style={artistStrip}>
+                        {this.state.artists.map(artist => <h4 key={artist.id}><H1>Artist Name: {artist.name}</H1>
+                            <div>Songs: {artist.songs}</div>
+                            <Button onClick={() => this.deleteArtist(artist.id)}>Delete artist</Button></h4>)}
+
+                    </div>
+
                 </ThemeProvider>
             </>
         )
