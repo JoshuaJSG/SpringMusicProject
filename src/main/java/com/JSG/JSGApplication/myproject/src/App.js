@@ -7,12 +7,12 @@ import { func } from 'prop-types';
 
 
 const stripStyle = {
-    background: '#ADD8E6',
+    background: '#192a56',
     padding: '1.5rem'
 }
 
 const artistStrip = {
-    background: '#fab1a0',
+    background: '#40739e',
     padding: '1.5rem',
 
 
@@ -38,6 +38,14 @@ const theme = {
 
 const H1 = styled.h1`
     font-family: ${(props) => props.theme.font};
+    color: white;
+`
+
+//Style 1
+
+const S1 = styled.h5`
+    font-family: ${(props) => props.theme.font};
+    color: white;
 `
 
 const api = axios.create({
@@ -118,7 +126,7 @@ class App extends Component {
                     </div>
                     <div style={artistStrip}>
                         {this.state.artists.map(artist => <h4 key={artist.id}><H1>Artist Name: {artist.name}</H1>
-                            <div>Songs: {artist.songs}</div>
+                            <S1><div>Songs: {artist.songs}</div></S1>
                             <Button onClick={() => this.deleteArtist(artist.id)}>Delete artist</Button></h4>)}
 
                     </div>
