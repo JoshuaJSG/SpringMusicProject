@@ -59,7 +59,49 @@ body{
 
 
 #logo path:nth-child(1){
-  stroke-dasharray: 30px;
-  stroke-dashoffset: 10px;
+  stroke-dasharray: 200px;
+  stroke-dashoffset: 50px;
+}
+
+#logo path:nth-child(2){
+  
+}
+#logo path:nth-child(3){
+  
+}
+
+#logo path:nth-child(4){
+  
+}
+
+#logo path:nth-child(5){
+  
+}
+#logo path:nth-child(6){
+
+}
+
+#logo path:nth-child(7){
+  
+}
+
+#logo path:nth-child(8){
+  
+}
+
+#logo path:nth-child(9){
+  
+}
+
+#logo path:nth-child(10){
+ 
+}
+
+#logo path:nth-child(11){
+  
+}
+
+#logo path:nth-child(12){
+  
 }
 
