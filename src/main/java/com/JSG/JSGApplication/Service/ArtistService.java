@@ -12,7 +12,6 @@ import java.util.Collection;
 @Service
 public class ArtistService {
 
-    //SERVICE THAT USES HARDCODED DATABASE
     @Autowired
     @Qualifier("mysql")
     private ArtistDAOInterface artistDAO;

@@ -17,6 +17,9 @@ public class FetchDataController {
 
     private List<String> albums = new ArrayList<>();
     public List<String> songs = new ArrayList<>();
+
+
+
     public String baseUrl = "https://itunes.apple.com/search?term=";
 
     
@@ -36,14 +39,14 @@ public class FetchDataController {
         }
 
         String newUrl = baseUrl+usedArtistName;
-        System.out.println(newUrl);
+
         try {
             fetchUrl(newUrl);
         } catch (Exception e) {
             System.out.println("Error making request to URL: " +newUrl+"\n"+ e.getLocalizedMessage());
             e.printStackTrace();
         }
-        return songs;
+        return removeDuplicatesInList(songs);
     }
 
 
@@ -91,15 +94,18 @@ public class FetchDataController {
             albums.add(albumName);
             songs.add(trackName);
         }
-        System.out.println("Artist: "+name+ "\nSongs:");
-        System.out.println();
-        loopList(songs);
     }
 
-    private void loopList(List<String> musicList){
-        for (String music : musicList) {
-            System.out.println(music);
+
+    public List<String> removeDuplicatesInList(List<String> artistSongList){
+        List<String> noDuplicates = new ArrayList<>();
+
+        for (String song: artistSongList) {
+            if (!noDuplicates.contains(song)){
+                noDuplicates.add(song);
+            }
         }
+        return noDuplicates;
     }
 }
 
