@@ -50,13 +50,13 @@ const S1 = styled.h5`
 `
 
 const api = axios.create({
-    baseURL: "http://localhost:8080/artists"
+    baseURL: "http://localhost:8080/artists/"
 });
 
 
 const logo = document.querySelectorAll("#logo path");
 
-for(let i = 0; i<logo.length; i++){
+for (let i = 0; i < logo.length; i++) {
     console.log(`Letter ${i} is ${logo[i].getTotalLength()}`);
 }
 
@@ -67,6 +67,7 @@ class App extends Component {
     state = {
         artists: [],
         theArtistName: '',
+        id: '',
     };
 
     constructor(props) {
@@ -98,6 +99,16 @@ class App extends Component {
     }
 
 
+    deleteArtistById() {
+        {
+            if (window.confirm('Are you sure you want to delete this field')) {
+                axios.delete("http://localhost:8080/artists/6")
+                .catch(err => console.error(err));
+            }
+        }
+
+    }
+
 
 
     //Once data is changed it is "Mounted" 
@@ -115,12 +126,14 @@ class App extends Component {
         this.setState({ theArtistName: event.target.value });
     }
 
+
+
     render() {
         return (
             <>
 
                 <ThemeProvider theme={theme}>
-                <Logo/>
+                    <Logo />
                     <div className="App">
                         <div style={stripStyle}>
                             <H1>Artist Retrieval App</H1>
@@ -135,8 +148,8 @@ class App extends Component {
                     <div style={artistStrip}>
                         {this.state.artists.map(artist => <S1 key={artist.id}><H1>Artist Name: {artist.name}</H1>
                             <S1><div>Songs: {artist.songs}</div></S1>
-                            <Button onClick={() => this.deleteArtist(artist.id)}>Delete artist</Button></S1>)}
-                        
+                            <H1>{artist.id}</H1>
+                            <Button onClick={() => this.deleteArtistById()}> Delete Artist</Button></S1>)}
                     </div>
                 </ThemeProvider>
             </>
