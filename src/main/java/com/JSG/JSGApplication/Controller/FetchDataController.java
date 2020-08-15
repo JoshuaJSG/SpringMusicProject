@@ -19,52 +19,51 @@ public class FetchDataController {
     public List<String> songs = new ArrayList<>();
 
 
-
     public String baseUrl = "https://itunes.apple.com/search?term=";
 
-    
-    public List<String> searchArtistbyName(String artistName){
+
+    public List<String> searchArtistbyName(String artistName) {
         String usedArtistName = "";
         List<String> namesArrayWithPlus = new ArrayList<>();
         String[] splitArtistNameArray = artistName.split(" ");
 
-        if (splitArtistNameArray.length==1){
+        if (splitArtistNameArray.length == 1) {
             usedArtistName = artistName;
         } else {
-            for (int i = 0; i <splitArtistNameArray.length-1; i++) {
-                String namesWithPlus = splitArtistNameArray[i] +"+"+splitArtistNameArray[splitArtistNameArray.length-1];
+            for (int i = 0; i < splitArtistNameArray.length - 1; i++) {
+                String namesWithPlus = splitArtistNameArray[i] + "+" + splitArtistNameArray[splitArtistNameArray.length - 1];
                 namesArrayWithPlus.add(namesWithPlus);
             }
             usedArtistName = getItemsFromList(namesArrayWithPlus);
         }
 
-        String newUrl = baseUrl+usedArtistName;
+        String newUrl = baseUrl + usedArtistName;
 
         try {
             fetchUrl(newUrl);
         } catch (Exception e) {
-            System.out.println("Error making request to URL: " +newUrl+"\n"+ e.getLocalizedMessage());
+            System.out.println("Error making request to URL: " + newUrl + "\n" + e.getLocalizedMessage());
             e.printStackTrace();
         }
         return removeDuplicatesInList(songs);
     }
 
 
-    public void cleanSongs(){
+    public void cleanSongs() {
         songs = new ArrayList<>();
     }
 
 
-    private String getItemsFromList(List<String> array){
+    private String getItemsFromList(List<String> array) {
         String names = "";
         for (String name : array) {
-            names+=name;
+            names += name;
         }
         return names;
     }
 
 
-    private String fetchUrl(String urlString) throws Exception{
+    private String fetchUrl(String urlString) throws Exception {
         StringBuilder result = new StringBuilder();
         URL url = new URL(urlString);
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -80,14 +79,14 @@ public class FetchDataController {
     }
 
 
-    private void parseJSON(String httpResponse){
+    private void parseJSON(String httpResponse) {
         String name = "";
         String albumName = "";
         String trackName = "";
         String jsonString = httpResponse.toString();
         JSONObject obj = new JSONObject(jsonString);
         JSONArray contributorsArray = obj.getJSONArray("results");
-        for (int i = 0; i < contributorsArray.length()-1; i++) {
+        for (int i = 0; i < contributorsArray.length() - 1; i++) {
             name = contributorsArray.getJSONObject(0).getString("artistName");
             trackName = contributorsArray.getJSONObject(i).getString("trackName");
 //            albumName = contributorsArray.getJSONObject(i+1).getString("collectionName");
@@ -97,15 +96,23 @@ public class FetchDataController {
     }
 
 
-    public List<String> removeDuplicatesInList(List<String> artistSongList){
+    public List<String> removeDuplicatesInList(List<String> artistSongList) {
         List<String> noDuplicates = new ArrayList<>();
 
-        for (String song: artistSongList) {
-            if (!noDuplicates.contains(song)){
+        for (String song : artistSongList) {
+            if (!noDuplicates.contains(song)) {
                 noDuplicates.add(song);
             }
         }
         return noDuplicates;
     }
+
+
+//    public List<String> removeBracket(List<String> list) {
+//
+//    }
+
+
+
 }
 
