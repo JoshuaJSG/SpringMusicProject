@@ -99,11 +99,12 @@ class App extends Component {
     }
 
 
-    deleteArtistById() {
+    deleteArtistById(artistIdNumber) {
+        
         {
             if (window.confirm('Are you sure you want to delete this field')) {
-                axios.delete("http://localhost:8080/artists/6")
-                .catch(err => console.error(err));
+                axios.delete("http://localhost:8080/artists/"+artistIdNumber)
+                    .catch(err => console.error(err));
             }
         }
 
@@ -149,7 +150,7 @@ class App extends Component {
                         {this.state.artists.map(artist => <S1 key={artist.id}><H1>Artist Name: {artist.name}</H1>
                             <S1><div>Songs: {artist.songs}</div></S1>
                             <H1>{artist.id}</H1>
-                            <Button onClick={() => this.deleteArtistById()}> Delete Artist</Button></S1>)}
+                            <Button onClick={() => this.deleteArtistById(artist.id)}> Delete Artist</Button></S1>)}
                     </div>
                 </ThemeProvider>
             </>
